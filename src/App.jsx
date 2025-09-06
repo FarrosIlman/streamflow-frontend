@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import './App.css';
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 function App() {
   // State untuk form input
@@ -18,7 +19,7 @@ function App() {
   // Fungsi untuk mengambil daftar stream aktif dari backend
   const fetchActiveStreams = async () => {
     try {
-      const response = await axios.get('http://localhost:3000/api/streams');
+      const response = await axios.get(`${API_BASE_URL}/api/streams`);
       setActiveStreams(response.data.activeStreams);
     } catch (error) {
       console.error("Failed to fetch active streams", error);
