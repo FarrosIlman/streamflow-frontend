@@ -54,7 +54,7 @@ function App() {
       const formData = new FormData();
       formData.append('video', selectedFile);
 
-      const uploadResponse = await axios.post('http://localhost:3000/api/upload', formData, {
+      const uploadResponse = await axios.post(`${API_BASE_URL}/api/upload`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
@@ -64,7 +64,7 @@ function App() {
       setMessage(`Step 2/2: Starting stream for ${selectedFile.name}...`);
 
       // LANGKAH 2: MULAI STREAM DENGAN PATH DARI SERVER
-      const streamResponse = await axios.post('http://localhost:3000/api/stream/start', {
+      const streamResponse = await axios.post(`${API_BASE_URL}/api/stream/start`, {
         videoPath: serverVideoPath,
         youtubeKey: youtubeKey,
         facebookKey: facebookKey,
@@ -85,7 +85,7 @@ function App() {
   const handleStopStream = async (streamId) => {
     setMessage(`Stopping stream ${streamId}...`);
     try {
-      await axios.post(`http://localhost:3000/api/stream/stop/${streamId}`);
+      await axios.post(`${API_BASE_URL}/api/stream/stop/${streamId}`);
       setMessage(`✅ Stream ${streamId} stopped.`);
       fetchActiveStreams(); // Langsung update daftar stream
     } catch (error) {
